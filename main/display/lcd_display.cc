@@ -141,6 +141,17 @@ SpiLcdDisplay::SpiLcdDisplay(esp_lcd_panel_io_handle_t panel_io, esp_lcd_panel_h
         return;
     }
 
+#if defined(CONFIG_BOARD_TYPE_Freenove_ESP32S3_DISPLAY_3_5_LCD)
+    lv_display_add_event_cb(display_, [](lv_event_t * e) {
+        lv_area_t * area = (lv_area_t *)lv_event_get_param(e);
+        area->x1 = area->x1 & ~0x3;
+	    area->y1 = area->y1 & ~0x3;
+
+	    area->x2 = area->x2 | 0x3;
+	    area->y2 = area->y2 | 0x3;
+    }, LV_EVENT_INVALIDATE_AREA, NULL);
+#endif
+
     if (offset_x != 0 || offset_y != 0) {
         lv_display_set_offset(display_, offset_x, offset_y);
     }

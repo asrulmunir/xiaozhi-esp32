@@ -72,3 +72,4 @@ dependencies:
   ## Required IDF version
   idf:
     version: '>=5.4.0'
+  espressif/esp_lcd_st77922: '*'
