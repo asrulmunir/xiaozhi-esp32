@@ -246,6 +246,9 @@ choice BOARD_TYPE
     config BOARD_TYPE_Freenove_ESP32S3_DISPLAY_3_5_LCD
         bool "Freenove ESP32S3 Display 3.5 LCD"
         depends on IDF_TARGET_ESP32S3
+    config BOARD_TYPE_Freenove_ESP32S3_DISPLAY_4_0_LCD
+        bool "Freenove ESP32S3 Display 4.0 LCD"
+        depends on IDF_TARGET_ESP32S3
     config BOARD_TYPE_MIXGO_NOVA
         bool "元控·青春"
         depends on IDF_TARGET_ESP32S3
