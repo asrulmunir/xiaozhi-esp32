@@ -11,6 +11,7 @@
 #include "assets/lang_config.h"
 #include "mcp_server.h"
 #include "audio_debugger.h"
+#include "settings.h"
 
 #if CONFIG_USE_AUDIO_PROCESSOR
 #include "afe_audio_processor.h"
