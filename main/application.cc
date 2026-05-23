@@ -467,7 +467,7 @@ void Application::Start() {
     if (ota.HasWebsocketConfig()) {
         protocol_ = std::make_unique<WebsocketProtocol>();
     } else {
-        ESP_LOGW(TAG, \"No WebSocket config found, using default Hermes URL\");
+        ESP_LOGW(TAG, "No WebSocket config found, using default Hermes URL");
         // Set default WebSocket URL if not configured
         Settings settings("websocket", true);
         settings.SetString("url", "ws://hermes.tetupai.com:8000/bidin/v1/");
