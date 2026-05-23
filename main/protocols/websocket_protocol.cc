@@ -98,6 +98,12 @@ bool WebsocketProtocol::OpenAudioChannel() {
         version_ = version;
     }
 
+    // Default to Hermes Bidin if not configured
+    if (url.empty()) {
+        url = "ws://hermes.tetupai.com:8000/bidin/v1/";
+        ESP_LOGI(TAG, "Using default Hermes URL: %s", url.c_str());
+    }
+
     error_occurred_ = false;
 
     websocket_ = Board::GetInstance().CreateWebSocket();
