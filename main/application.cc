@@ -462,13 +462,16 @@ void Application::Start() {
     McpServer::GetInstance().AddCommonTools();
 #endif
 
-    if (ota.HasMqttConfig()) {
-        protocol_ = std::make_unique<MqttProtocol>();
-    } else if (ota.HasWebsocketConfig()) {
+    // FORCE WebSocket protocol for Hermes Bidin
+    // Skip MQTT even if config exists
+    if (ota.HasWebsocketConfig()) {
         protocol_ = std::make_unique<WebsocketProtocol>();
     } else {
-        ESP_LOGW(TAG, "No protocol specified in the OTA config, using MQTT");
-        protocol_ = std::make_unique<MqttProtocol>();
+        ESP_LOGW(TAG, \"No WebSocket config found, using default Hermes URL\");
+        // Set default WebSocket URL if not configured
+        Settings settings("websocket", true);
+        settings.SetString("url", "ws://hermes.tetupai.com:8000/bidin/v1/");
+        protocol_ = std::make_unique<WebsocketProtocol>();
     }
 
     protocol_->OnNetworkError([this](const std::string& message) {
