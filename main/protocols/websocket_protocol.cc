@@ -115,6 +115,11 @@ bool WebsocketProtocol::OpenAudioChannel() {
         }
         websocket_->SetHeader("Authorization", token.c_str());
     }
+    
+    // Required headers for WebSocket handshake (ESP32 compatibility)
+    websocket_->SetHeader("Connection", "Upgrade");
+    websocket_->SetHeader("Upgrade", "websocket");
+    
     websocket_->SetHeader("Protocol-Version", std::to_string(version_).c_str());
     websocket_->SetHeader("Device-Id", SystemInfo::GetMacAddress().c_str());
     websocket_->SetHeader("Client-Id", Board::GetInstance().GetUuid().c_str());
