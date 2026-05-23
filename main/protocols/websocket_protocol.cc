@@ -188,11 +188,16 @@ bool WebsocketProtocol::OpenAudioChannel() {
     });
 
     ESP_LOGI(TAG, "Connecting to websocket server: %s with version: %d", url.c_str(), version_);
+    
+    // Give WebSocket more time to complete handshake
     if (!websocket_->Connect(url.c_str())) {
         ESP_LOGE(TAG, "Failed to connect to websocket server");
         SetError(Lang::Strings::SERVER_NOT_CONNECTED);
         return false;
     }
+    
+    // Wait a bit for connection to stabilize
+    vTaskDelay(pdMS_TO_TICKS(500));
 
     // Send hello message to describe the client
     auto message = GetHelloMessage();
