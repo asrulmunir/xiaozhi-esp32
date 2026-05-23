@@ -159,7 +159,10 @@ bool Ota::CheckVersion() {
         ESP_LOGI(TAG, "No mqtt section found !");
     }
 
+    // DISABLED: Don't overwrite WebSocket config from OTA server
+    // This allows us to use custom Hermes URL instead of xiaozhi.me
     has_websocket_config_ = false;
+    /*
     cJSON *websocket = cJSON_GetObjectItem(root, "websocket");
     if (cJSON_IsObject(websocket)) {
         Settings settings("websocket", true);
@@ -179,6 +182,7 @@ bool Ota::CheckVersion() {
     } else {
         ESP_LOGI(TAG, "No websocket section found!");
     }
+    */
 
     has_server_time_ = false;
     cJSON *server_time = cJSON_GetObjectItem(root, "server_time");
