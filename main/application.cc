@@ -471,7 +471,7 @@ void Application::Start() {
         ESP_LOGW(TAG, "No WebSocket config found, using default Hermes URL");
         // Set default WebSocket URL if not configured
         Settings settings("websocket", true);
-        settings.SetString("url", "ws://hermes.tetupai.com:8000/bidin/v1/");
+        settings.SetString("url", "ws://20.17.179.3:8000/bidin/v1/");
         protocol_ = std::make_unique<WebsocketProtocol>();
     }
 
